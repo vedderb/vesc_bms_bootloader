@@ -11,7 +11,7 @@ endif
 
 # C specific options here (added to USE_OPT).
 ifeq ($(USE_COPT),)
-  USE_COPT = 
+  USE_COPT =
 endif
 
 # C++ specific options here (added to USE_OPT).
@@ -26,7 +26,7 @@ endif
 
 # Linker extra options here.
 ifeq ($(USE_LDOPT),)
-  USE_LDOPT = 
+  USE_LDOPT =
 endif
 
 # Enable this if you want link time optimizations (LTO)
@@ -214,6 +214,9 @@ ULIBS = -lm --specs=nosys.specs
 # End of user defines
 ##############################################################################
 
+RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/mk
+include $(RULESPATH)/rules.mk
+
 .PHONY: upload upload_remote
 
 upload: build/$(PROJECT).bin
@@ -222,5 +225,3 @@ upload: build/$(PROJECT).bin
 upload_remote: build/$(PROJECT).bin
 	./upload_remote build/$(PROJECT).bin benjamin 127.0.0.1 62122
 
-RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/mk
-include $(RULESPATH)/rules.mk
