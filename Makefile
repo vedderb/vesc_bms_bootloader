@@ -41,7 +41,7 @@ endif
 
 # Enable this if you want to see the full log while compiling.
 ifeq ($(USE_VERBOSE_COMPILE),)
-  USE_VERBOSE_COMPILE = yes
+  USE_VERBOSE_COMPILE = no
 endif
 
 # If enabled, this option makes the build process faster by not compiling
@@ -220,7 +220,8 @@ include $(RULESPATH)/rules.mk
 .PHONY: upload upload_remote
 
 upload: build/$(PROJECT).bin
-	openocd -f stm32l4_stlinkv2.cfg -c "reset_config trst_only combined connect_assert_srst" -c "program build/$(PROJECT).elf verify reset exit"
+	openocd -f stm32l4_stlinkv2.cfg \
+		-c "program build/$(PROJECT).elf verify reset exit"
 
 upload_remote: build/$(PROJECT).bin
 	./upload_remote build/$(PROJECT).bin benjamin 127.0.0.1 62122
